@@ -1,4 +1,4 @@
-#include "Member.hpp"
+#include "Member"
 int Member::counter=0;
 map<int,Member*>::iterator it;
 Member::Member()
