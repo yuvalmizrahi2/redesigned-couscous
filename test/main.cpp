@@ -23,7 +23,7 @@ void test3()
 void test4()
 {
     aviv.unfollow(yuval);
-    assert(inon.numFollowing() == 0 && aviv.numFollowers() == 0);
+    assert(yuval.numFollowing() == 0 && aviv.numFollowers() == 0);
 }
 void test5()
 {
