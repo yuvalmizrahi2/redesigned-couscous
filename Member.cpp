@@ -1,17 +1,16 @@
 #include "Member.h"
 int Member::counter=0;
-map<int,Member*>::iterator it;
+map<int,Member&>::iterator it;
 Member::Member()
 {
-  Member::counter++;
-  id = Member::counter;
+  id = ++counter;
 };
 void Member::follow(Member& name)
 {
 	if(this->id != name.id && Following.find(name.id)==Following.end())
     {
-		Following.insert(pair <int,Member*> (name.id,&name));
-		name.Followers.insert(pair<int,Member*> (this->id,this));
+		Following.insert(pair <int,Member&> (name.id,name));
+		name.Followers.insert(pair<int,Member&> (this->id,*this));
 	}
 }
 void Member::unfollow(Member &name)
@@ -22,11 +21,11 @@ void Member::unfollow(Member &name)
 		name.Followers.erase(name.Followers.find(this->id));
 	}
 }
-int Member::numFollowers()
+int Member::numFollowers() const
 {
 	return this->Followers.size();
 }
-int Member::numFollowing()
+int Member::numFollowing() const
 {
 	return this->Following.size();
 }
@@ -38,12 +37,12 @@ Member::~Member(){
 	counter--;
 	for(it=Followers.begin();it!=Followers.end();it++)
 	{
-		if(it->second->Following.find(this->id)!=it->second->Following.end())
-			it->second->Following.erase(it->second->Following.find(this->id));
+		if(it->second.Following.find(this->id)!=it->second.Following.end())
+			it->second.Following.erase(it->second.Following.find(this->id));
 	}
 	for(it=Following.begin();it!=Following.end();it++)
 	{
-		if(it->second->Followers.find(this->id)!=it->second->Followers.end())
-			it->second->Followers.erase(it->second->Followers.find(this->id));
+		if(it->second.Followers.find(this->id)!=it->second.Followers.end())
+			it->second.Followers.erase(it->second.Followers.find(this->id));
 	}
 }
