@@ -17,8 +17,8 @@ public:
 	/* destructor */
 	~Member();
 	/* functions */
-	void follow(Member &name);
-	void unfollow(Member &name);
+	void follow(Member&);
+	void unfollow(Member&);
 	int numFollowers() const; 
 	int numFollowing() const;
 	/* static functions */
